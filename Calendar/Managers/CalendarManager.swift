@@ -18,15 +18,23 @@ class CalendarManager {
     
     // MARK:- Variables
     var dateComponents:DateComponents?
+    var date: Date = Date()
+    
+    var preMonthArr = [Int]()
+    var currentMonthArr = [Int]()
+    var nextMonthArr = [Int]()
     
     
     
     // MARK:- Methods
-    func getMonthDaysNumber(year: Int, month: Int) -> Int {
-        self.dateComponents = DateComponents(year: year, month: month)
-        let date = calendar.date(from: self.dateComponents!)!
-        
-        let range = calendar.range(of: .day, in: .month, for: date)
+    func getDate() -> Date {
+        return date
+    }
+    
+    
+    
+    func getMonthDaysNumber() -> Int {
+        let range = calendar.range(of: .day, in: .month, for: self.date)
         let numDays = range?.count
         
         return numDays!
@@ -34,7 +42,35 @@ class CalendarManager {
     
     
     
-    func getFirstDayOfWeekInMonth(year: Int, month: Int) -> Int {
+    func getFirstDayOfWeekInMonth() -> Int? {
+        guard let weekDay = self.calendar.dateComponents([.weekday], from: self.date).weekday else {
+            return nil
+        }
+        
+        return weekDay
+    }
+    
+    
+    
+    func getLastDayOfWeekInMonth() -> Int? {
+        let date = self.date - 1
+        
+        guard let weekDay = self.calendar.dateComponents([.weekday], from: date).weekday else {
+            return nil
+        }
+        
+        return weekDay
+    }
+    
+    
+    
+    func setDateArray() {
+        let date = self.date.getDate()
+        
+        let year = date.year
+        let month = date.month
+        let day = date.day
+        
         
     }
 }

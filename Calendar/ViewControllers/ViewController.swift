@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     // MARK:- Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(CalendarManager.shared.getMonthDaysNumber())
     }
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60FB7D2822E5EAC5002C4051 /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FB7D2722E5EAC5002C4051 /* Extension+Date.swift */; };
 		BA71EE0422E53B05007B670E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA71EE0322E53B05007B670E /* AppDelegate.swift */; };
 		BA71EE0622E53B05007B670E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA71EE0522E53B05007B670E /* ViewController.swift */; };
 		BA71EE0922E53B05007B670E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA71EE0722E53B05007B670E /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		60FB7D2722E5EAC5002C4051 /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
 		BA71EE0022E53B05007B670E /* Calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA71EE0322E53B05007B670E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA71EE0522E53B05007B670E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		60FB7D2622E5EAB5002C4051 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				60FB7D2722E5EAC5002C4051 /* Extension+Date.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		BA71EDF722E53B05007B670E = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +109,7 @@
 		BA71EE0222E53B05007B670E /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				60FB7D2622E5EAB5002C4051 /* Extension */,
 				BA71EE3722E54014007B670E /* Managers */,
 				BA71EE3322E53FF9007B670E /* Storyboards */,
 				BA71EE3422E53FFB007B670E /* ViewControllers */,
@@ -292,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA71EE3A22E54090007B670E /* CalendarManager.swift in Sources */,
+				60FB7D2822E5EAC5002C4051 /* Extension+Date.swift in Sources */,
 				BA71EE0622E53B05007B670E /* ViewController.swift in Sources */,
 				BA71EE0422E53B05007B670E /* AppDelegate.swift in Sources */,
 			);
