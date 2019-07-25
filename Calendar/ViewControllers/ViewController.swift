@@ -18,8 +18,9 @@ class ViewController: UIViewController {
     // MARK:- Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Date().stringToDate(string: "2019-05-03")?.getFirstDayWeekInMonth())
+        print(Date().stringToDate(string: "2019-05-03")?.getLasDayWeekInMonth())
         
-        print(CalendarManager.shared.getMonthDaysNumber())
     }
 }
 
