@@ -10,19 +10,50 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // MARK:- Outlets
+    @IBOutlet var calendarView: UICollectionView!
+    @IBOutlet var viewHeightConstraint: NSLayoutConstraint!
+    
+    
+    
     // MARK:- Constants
     let CELL_WIDTH = 38
     let CELL_HEIGHT = 38
+    
+    
+    
+    // MARK:- Variables
+    var curMonthArr = [Int]()
+    
     
 
     // MARK:- Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        CalendarManager.shared.setCurrentMonthArr()
-        for day in CalendarManager.shared.currentMonthArr {
-            print(day)
-        }
+        CalendarManager.shared.setMonthArr()
+        self.curMonthArr = CalendarManager.shared.currentMonthArr
+    }
+    
+    
+    
+    // MARK:- Actions
+    @IBAction func preBtnTouched(_ sender: Any) {
+        CalendarManager.shared.movePreMonth()
+        self.curMonthArr = CalendarManager.shared.currentMonthArr
+        
+        self.viewHeightConstraint.constant = CGFloat(self.curMonthArr.count / 7 * CELL_HEIGHT)
+        self.calendarView.reloadData()
+    }
+    
+    
+    
+    @IBAction func nextBtnTouched(_ sender: Any) {
+        CalendarManager.shared.moveNextMonth()
+        self.curMonthArr = CalendarManager.shared.currentMonthArr
+        
+        self.viewHeightConstraint.constant = CGFloat(self.curMonthArr.count / 7 * CELL_HEIGHT)
+        self.calendarView.reloadData()
     }
 }
 
@@ -30,7 +61,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return self.curMonthArr.count
     }
     
     
@@ -38,7 +69,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCollectionViewCell", for: indexPath) as! DayCollectionViewCell
-        cell.dayLabel.text = "\(indexPath.row)"
+        cell.dayLabel.text = "\(self.curMonthArr[indexPath.row])"
         
         return cell
     }

@@ -27,26 +27,32 @@ class CalendarManager {
     var month = Date().getDate().month
     var day = Date().getDate().year
     
-    func setCurrentMonthArr() {
-        let preMonthDays = date.getPreMonthDaysNumber()
-        let curMonthDays = date.getMonthDaysNumber()
-        let curFirstDayWeek = date.getFirstDayWeekInMonth()
-        let curLastDayWeek = date.getLastDayWeekInMonth()
+    func setMonthArr() {
+        let curDate = date
+        self.currentMonthArr = curDate.getMonthArray()
+        self.preMonthArr = curDate.getPreMonthDate().getMonthArray()
+        self.nextMonthArr = curDate.getNextMonthDate().getMonthArray()
+    }
+    
+    
+    
+    func movePreMonth() {
+        date = date.getPreMonthDate()
         
-        // 이전 달 넣기
-        for dayWeek in 0..<curFirstDayWeek - 1 {
-            let preMonthDay = preMonthDays - dayWeek
-            self.currentMonthArr.append(preMonthDay)
-        }
+        self.nextMonthArr = self.currentMonthArr
+        self.currentMonthArr = self.preMonthArr
         
-        // 현재 달 넣기
-        for day in 1...curMonthDays {
-            self.currentMonthArr.append(day)
-        }
+        self.preMonthArr = self.date.getPreMonthDate().getMonthArray()
+    }
+    
+    
+    
+    func moveNextMonth() {
+        date = date.getNextMonthDate()
         
-        // 다음 달 넣기
-        for day in 1...7 - curLastDayWeek {
-            self.currentMonthArr.append(day)
-        }
+        self.preMonthArr = self.currentMonthArr
+        self.currentMonthArr = self.nextMonthArr
+        
+        self.nextMonthArr = self.date.getNextMonthDate().getMonthArray()
     }
 }

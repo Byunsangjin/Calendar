@@ -82,4 +82,47 @@ extension Date {
     func endOfMonth() -> Date {
         return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
     }
+    
+    
+    
+    func getPreMonthDate() -> Date {
+        let preMonth = Calendar.current.date(byAdding: .month, value: -1, to: self)
+        return preMonth!
+    }
+    
+    
+    
+    func getNextMonthDate() -> Date {
+        let nextMonth = Calendar.current.date(byAdding: .month, value: 1, to: self)
+        return nextMonth!
+    }
+    
+    
+    
+    func getMonthArray() -> [Int] {
+        let preMonthDaysNumber = self.getPreMonthDaysNumber()
+        let curMonthDaysNumber = self.getMonthDaysNumber()
+        let curFirstDayWeek = self.getFirstDayWeekInMonth()
+        let curLastDayWeek = self.getLastDayWeekInMonth()
+        
+        var monthArr = [Int]()
+        
+        // 이전 달 넣기
+        for dayWeek in 0..<curFirstDayWeek - 1 {
+            let preMonthDay = preMonthDaysNumber - dayWeek
+            monthArr.insert(preMonthDay, at: 0)
+        }
+        
+        // 현재 달 넣기
+        for day in 1...curMonthDaysNumber {
+            monthArr.append(day)
+        }
+        
+        // 다음 달 넣기
+        for day in 0..<7 - curLastDayWeek {
+            monthArr.append(day + 1)
+        }
+        
+        return monthArr
+    }
 }
