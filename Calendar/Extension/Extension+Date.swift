@@ -65,7 +65,7 @@ extension Date {
     
     
     
-    func getLasDayWeekInMonth() -> Int {
+    func getLastDayWeekInMonth() -> Int {
         let calendar = Calendar.current
         return calendar.dateComponents([.weekday], from: self.endOfMonth()).weekday!
     }
