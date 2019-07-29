@@ -76,7 +76,7 @@ extension Date {
         let calendar = Calendar.current
         return calendar.date(from: calendar.dateComponents([.year, .month], from: calendar.startOfDay(for: self)))!
     }
-
+    
     
     
     func endOfMonth() -> Date {
@@ -99,28 +99,39 @@ extension Date {
     
     
     
-    func getMonthArray() -> [Int] {
+    func getMonthArray() -> [DayInfo] {
         let preMonthDaysNumber = self.getPreMonthDaysNumber()
         let curMonthDaysNumber = self.getMonthDaysNumber()
         let curFirstDayWeek = self.getFirstDayWeekInMonth()
         let curLastDayWeek = self.getLastDayWeekInMonth()
         
-        var monthArr = [Int]()
+        var monthArr = [DayInfo]()
+        var dayCount = 0
         
         // 이전 달 넣기
         for dayWeek in 0..<curFirstDayWeek - 1 {
             let preMonthDay = preMonthDaysNumber - dayWeek
-            monthArr.insert(preMonthDay, at: 0)
+            let dayInfo = DayInfo(day: preMonthDay, monthIndex: MonthIndex.PRE_MONTH)
+            
+            monthArr.insert(dayInfo, at: 0)
+            dayCount = dayCount + 1
         }
         
         // 현재 달 넣기
         for day in 1...curMonthDaysNumber {
-            monthArr.append(day)
+            let isSunday = dayCount % 7 == 0 ? true : false
+            let dayInfo = DayInfo(day: day, monthIndex: MonthIndex.CUR_MONTH, isSunday: isSunday)
+            
+            monthArr.append(dayInfo)
+            dayCount = dayCount + 1
         }
         
         // 다음 달 넣기
         for day in 0..<7 - curLastDayWeek {
-            monthArr.append(day + 1)
+            let dayInfo = DayInfo(day: day + 1, monthIndex: MonthIndex.PRE_MONTH)
+            
+            monthArr.append(dayInfo)
+            dayCount = dayCount + 1
         }
         
         return monthArr

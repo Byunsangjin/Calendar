@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     
     
     // MARK:- Variables
-    var curMonthArr = [Int]()
+    var curMonthArr = [DayInfo]()
     
     
 
@@ -69,7 +69,16 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCollectionViewCell", for: indexPath) as! DayCollectionViewCell
-        cell.dayLabel.text = "\(self.curMonthArr[indexPath.row])"
+        
+        let dayInfo = self.curMonthArr[indexPath.row]
+        var textColor = UIColor.red
+        if !dayInfo.isSunday {
+            let textAlpha:CGFloat = dayInfo.monthIndex == MonthIndex.CUR_MONTH ? 0.5 : 0.2
+            textColor = UIColor.black.withAlphaComponent(textAlpha)
+        }
+        
+        cell.dayLabel.textColor = textColor
+        cell.dayLabel.text = "\(self.curMonthArr[indexPath.row].day)"
         
         return cell
     }
